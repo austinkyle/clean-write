@@ -12,7 +12,7 @@ test('creates, edits, formats, renames, and persists a document', async ({ page 
   await resetDocuments(page);
   await page.reload();
 
-  await expect(page.getByText('ClearWrite', { exact: true })).toBeVisible();
+  await expect(page.getByText('CleanWrite', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Create document', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Create document', exact: true }).click();
 
