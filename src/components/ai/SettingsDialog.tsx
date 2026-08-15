@@ -1,0 +1,7 @@
+'use client';
+/* eslint-disable no-unused-vars */
+import { DIALECT_LABELS, DIALECTS, type Dialect } from '@/features/ai/dialect';
+
+export function SettingsDialog({ dialect, onChange, onClose, aiConfigured }: { dialect: Dialect; onChange: (dialect: Dialect) => void; onClose: () => void; aiConfigured: boolean | null }) {
+  return <div className="ai-dialog-backdrop" role="presentation"><section className="settings-dialog" role="dialog" aria-modal="true" aria-labelledby="settings-title"><div className="ai-dialog-header"><div><p className="eyebrow">PREFERENCES</p><h2 id="settings-title">Settings</h2></div><button className="ai-dialog-close" type="button" aria-label="Close settings" onClick={onClose}>×</button></div><label className="settings-field">English dialect<select aria-label="English dialect" value={dialect} onChange={(event) => onChange(event.target.value as Dialect)}>{DIALECTS.map((item) => <option key={item} value={item}>{DIALECT_LABELS[item]}</option>)}</select></label><p className="settings-help">Dialect affects AI wording and spelling when AI tools are enabled.</p><div className="settings-ai-status"><span className="eyebrow">AI TOOLS</span><p>{aiConfigured === false ? 'Add your OpenAI API key to enable AI tools.' : aiConfigured === true ? 'AI tools are ready when you select text.' : 'Checking AI configuration…'}</p></div><button className="primary-button" type="button" onClick={onClose}>Done</button></section></div>;
+}

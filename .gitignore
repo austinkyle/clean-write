@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+.env.local
+.env*.local
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+data/.runtime/
+*.tsbuildinfo
+.DS_Store
