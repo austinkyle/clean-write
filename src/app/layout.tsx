@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import './styles.css';
 
 export const metadata: Metadata = {
-  title: 'ClearWrite — a calmer writing workspace',
+  title: 'CleanWrite — a calmer writing workspace',
   description: 'A local-first writing workspace for clear, deliberate drafts.',
 };
 

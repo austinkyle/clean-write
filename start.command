@@ -14,12 +14,12 @@ done
 
 APP_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" >/dev/null 2>&1 && pwd)"
 if ! cd "$APP_DIR"; then
-  echo "ClearWrite could not enter its application directory: $APP_DIR" >&2
+  echo "CleanWrite could not enter its application directory: $APP_DIR" >&2
   exit 1
 fi
 
 HOST="127.0.0.1"
-PORT="${CLEARWRITE_PORT:-4317}"
+PORT="${CLEANWRITE_PORT:-${CLEARWRITE_PORT:-4317}}"
 RUNTIME_DIR="$APP_DIR/data/.runtime"
 PID_FILE="$RUNTIME_DIR/app.pid"
 PORT_FILE="$RUNTIME_DIR/app.port"
@@ -30,13 +30,13 @@ mkdir -p "$RUNTIME_DIR"
 chmod 700 "$RUNTIME_DIR"
 
 if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
-  echo "ClearWrite requires Node.js and npm. Install Node.js 20.9+ and try again." >&2
+  echo "CleanWrite requires Node.js and npm. Install Node.js 20.9+ and try again." >&2
   exit 1
 fi
 
 node_major="$(node -p 'process.versions.node.split(".")[0]')"
 if [ "$node_major" -lt 20 ]; then
-  echo "ClearWrite requires Node.js 20.9+. Found $(node --version)." >&2
+  echo "CleanWrite requires Node.js 20.9+. Found $(node --version)." >&2
   exit 1
 fi
 
@@ -113,7 +113,7 @@ runtime_assets_ready() {
 prepare_runtime_assets() {
   standalone_next="$APP_DIR/.next/standalone/.next"
   if [ ! -d "$APP_DIR/.next/static" ]; then
-    echo "ClearWrite build is missing client assets under .next/static." >&2
+    echo "CleanWrite build is missing client assets under .next/static." >&2
     return 1
   fi
 
@@ -134,11 +134,11 @@ if [ -f "$PID_FILE" ]; then
   if process_is_owned "$existing_pid" "$existing_port"; then
     if wait_for_health "$existing_port"; then
       if runtime_assets_ready; then
-        echo "ClearWrite is already running at http://$HOST:$existing_port"
+        echo "CleanWrite is already running at http://$HOST:$existing_port"
         open "http://$HOST:$existing_port" >/dev/null 2>&1 || echo "Open this URL in your browser: http://$HOST:$existing_port"
         exit 0
       fi
-      echo "ClearWrite is running without its client assets; restarting it."
+      echo "CleanWrite is running without its client assets; restarting it."
       kill "$existing_pid" 2>/dev/null || true
       shutdown_attempt=1
       while kill -0 "$existing_pid" 2>/dev/null && [ "$shutdown_attempt" -le 20 ]; do
@@ -146,18 +146,18 @@ if [ -f "$PID_FILE" ]; then
         shutdown_attempt=$((shutdown_attempt + 1))
       done
     else
-      echo "ClearWrite has a live process that is not responding on port $existing_port." >&2
+      echo "CleanWrite has a live process that is not responding on port $existing_port." >&2
       echo "Inspect $LOG_FILE before starting another instance." >&2
       exit 1
     fi
   fi
 
-  echo "Removing stale ClearWrite runtime state."
+  echo "Removing stale CleanWrite runtime state."
   clear_stale_runtime
 fi
 
 if [ ! -d node_modules ] || [ ! -f node_modules/.package-lock.json ] || [ package.json -nt node_modules/.package-lock.json ] || [ package-lock.json -nt node_modules/.package-lock.json ]; then
-  echo "Installing ClearWrite dependencies..."
+  echo "Installing CleanWrite dependencies..."
   if [ -f package-lock.json ]; then npm ci || { echo "Dependency installation failed." >&2; exit 1; }; else npm install || { echo "Dependency installation failed." >&2; exit 1; }; fi
 fi
 
@@ -169,25 +169,25 @@ elif [ -n "$(find src -type f -newer "$BUILD_MARKER" -print -quit 2>/dev/null)" 
 fi
 
 if [ "$needs_build" -eq 1 ]; then
-  echo "Preparing the local ClearWrite build..."
+  echo "Preparing the local CleanWrite build..."
   npm run build || { echo "Build failed. See the output above." >&2; exit 1; }
 fi
 
 prepare_runtime_assets || { echo "Could not prepare the standalone runtime assets." >&2; exit 1; }
 
-echo "Starting ClearWrite on http://$HOST:$PORT..."
+echo "Starting CleanWrite on http://$HOST:$PORT..."
 HOSTNAME="$HOST" PORT="$PORT" nohup node "$APP_DIR/.next/standalone/server.js" >>"$LOG_FILE" 2>&1 &
 app_pid=$!
 printf '%s\n' "$app_pid" > "$PID_FILE"
 printf '%s\n' "$PORT" > "$PORT_FILE"
 
 if wait_for_health "$PORT"; then
-  echo "ClearWrite is ready at http://$HOST:$PORT"
+  echo "CleanWrite is ready at http://$HOST:$PORT"
   open "http://$HOST:$PORT" >/dev/null 2>&1 || echo "Open this URL in your browser: http://$HOST:$PORT"
   exit 0
 fi
 
-echo "ClearWrite did not become ready within 15 seconds." >&2
+echo "CleanWrite did not become ready within 15 seconds." >&2
 if process_is_owned "$app_pid" "$PORT"; then kill "$app_pid" 2>/dev/null || true; fi
 clear_stale_runtime
 echo "See $LOG_FILE for the server log." >&2

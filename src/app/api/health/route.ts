@@ -9,8 +9,8 @@ export function GET() {
     const { sqlite } = getDatabase();
     const result = sqlite.prepare('SELECT 1 AS ok').get() as { ok: number };
 
-    return NextResponse.json({ status: result.ok === 1 ? 'ok' : 'degraded', app: 'ClearWrite' });
+    return NextResponse.json({ status: result.ok === 1 ? 'ok' : 'degraded', app: 'CleanWrite' });
   } catch {
-    return NextResponse.json({ status: 'error', app: 'ClearWrite' }, { status: 503 });
+    return NextResponse.json({ status: 'error', app: 'CleanWrite' }, { status: 503 });
   }
 }

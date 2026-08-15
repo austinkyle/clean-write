@@ -1,9 +1,9 @@
-# AI Architecture — ClearWrite
+# AI Architecture — CleanWrite
 
 ## Status and decision
 
 This is the implementation contract for Phases 6 and 7. It adds optional,
-server-only AI assistance without changing ClearWrite's local-first source of
+server-only AI assistance without changing CleanWrite's local-first source of
 truth: canonical Tiptap JSON in SQLite and the mounted Tiptap editor remain
 authoritative. It does not authorize live AI calls in this architecture pass.
 

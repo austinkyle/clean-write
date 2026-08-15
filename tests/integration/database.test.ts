@@ -15,7 +15,7 @@ afterEach(() => {
 
 describe('local SQLite foundation', () => {
   it('creates the database directory, applies the foundation migration, and enables safe pragmas', () => {
-    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'clearwrite-db-'));
+    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'cleanwrite-db-'));
     const databasePath = path.join(tempDirectory, 'nested', 'writing-editor.sqlite');
 
     const handle = openDatabase(databasePath);
@@ -35,7 +35,7 @@ describe('local SQLite foundation', () => {
   });
 
   it('persists the selected writing dialect in local settings', () => {
-    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'clearwrite-settings-'));
+    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'cleanwrite-settings-'));
     const handle = openDatabase(path.join(tempDirectory, 'writing-editor.sqlite'));
     openHandles.push(handle);
 

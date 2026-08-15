@@ -1,6 +1,6 @@
-# ClearWrite
+# CleanWrite
 
-ClearWrite is a calm writing app that keeps your drafts on your own computer. It helps you write, spot hard-to-read passages, and make focused improvements without moving your documents into a hosted editor. Optional AI tools can rewrite selected text, check grammar, give whole-document feedback, or turn dense paragraphs into a clearer structure; you remain in control of every change.
+CleanWrite is a calm writing app that keeps your drafts on your own computer. It helps you write, spot hard-to-read passages, and make focused improvements without moving your documents into a hosted editor. Optional AI tools can rewrite selected text, check grammar, give whole-document feedback, or turn dense paragraphs into a clearer structure; you remain in control of every change.
 
 ## What it does
 
@@ -14,7 +14,7 @@ ClearWrite is a calm writing app that keeps your drafts on your own computer. It
 
 ## How it works
 
-ClearWrite is a local-first Next.js application. The browser supplies the editor experience, while the local server handles document storage, analysis requests, imports, exports, and optional AI calls. Documents are stored in SQLite under `data/`; AI keys are read only by the server and are never exposed as browser variables.
+CleanWrite is a local-first Next.js application. The browser supplies the editor experience, while the local server handles document storage, analysis requests, imports, exports, and optional AI calls. Documents are stored in SQLite under `data/`; AI keys are read only by the server and are never exposed as browser variables.
 
 AI suggestions are bounded structured responses. The app validates every candidate, shows it in a review dialog, and applies it only after the writer accepts it. If the document changes while a suggestion is being generated, the suggestion is marked stale instead of being applied to the wrong text.
 
@@ -60,9 +60,9 @@ OPENAI_REVIEW_MODEL=
 WRITING_EDITOR_DB_PATH=
 ```
 
-The model fields may stay blank to use ClearWrite's routed defaults. Never commit `.env.local` or place the API key in a `NEXT_PUBLIC_*` variable. Without a key, local writing, analysis, document management, and import/export continue to work.
+The model fields may stay blank to use CleanWrite's routed defaults. Never commit `.env.local` or place the API key in a `NEXT_PUBLIC_*` variable. Without a key, local writing, analysis, document management, and import/export continue to work.
 
-## Using ClearWrite
+## Using CleanWrite
 
 1. Create a document from the left rail or the File menu.
 2. Write or import a draft.

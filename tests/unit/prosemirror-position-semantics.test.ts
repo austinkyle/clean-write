@@ -11,7 +11,7 @@ const schema = getSchema([
   StarterKit.configure({ heading: { levels: [1, 2, 3] }, link: { openOnClick: false } }),
 ]);
 
-describe('ProseMirror positions for the ClearWrite schema', () => {
+describe('ProseMirror positions for the CleanWrite schema', () => {
   it('uses absolute text positions independent of inline marks and list nesting', () => {
     const document = schema.nodeFromJSON({
       type: 'doc',

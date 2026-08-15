@@ -38,6 +38,14 @@ type DocumentView = {
 
 const modes: Mode[] = ['Write', 'Edit', 'Feedback'];
 const ANALYSIS_CATEGORIES: FindingCategory[] = ['hard_sentence', 'very_hard_sentence', 'adverb', 'qualifier', 'passive_voice', 'complex_word', 'grammar', 'spelling', 'punctuation'];
+const READABILITY_TARGET_KEY = 'cleanwrite.readabilityTarget';
+const LEGACY_READABILITY_TARGET_KEY = 'clearwrite.readabilityTarget';
+const ANALYSIS_VISIBILITY_KEY = 'cleanwrite.analysisVisibility';
+const LEGACY_ANALYSIS_VISIBILITY_KEY = 'clearwrite.analysisVisibility';
+
+function readStoredSetting(key: string, legacyKey: string) {
+  return window.localStorage.getItem(key) ?? window.localStorage.getItem(legacyKey);
+}
 
 async function readResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
@@ -62,14 +70,14 @@ function formatUpdatedAt(value: string) {
 
 function storedReadabilityTarget(): ReadabilityTarget {
   if (typeof window === 'undefined') return 'default';
-  const value = window.localStorage.getItem('clearwrite.readabilityTarget');
+  const value = readStoredSetting(READABILITY_TARGET_KEY, LEGACY_READABILITY_TARGET_KEY);
   return value === 'accessible' || value === 'default' || value === 'technical' ? value : 'default';
 }
 
 function storedVisibleCategories(): FindingCategory[] {
   if (typeof window === 'undefined') return ANALYSIS_CATEGORIES;
   try {
-    const value = JSON.parse(window.localStorage.getItem('clearwrite.analysisVisibility') ?? 'null') as unknown;
+    const value = JSON.parse(readStoredSetting(ANALYSIS_VISIBILITY_KEY, LEGACY_ANALYSIS_VISIBILITY_KEY) ?? 'null') as unknown;
     return Array.isArray(value) ? ANALYSIS_CATEGORIES.filter((category) => value.includes(category)) : ANALYSIS_CATEGORIES;
   } catch { return ANALYSIS_CATEGORIES; }
 }
@@ -385,14 +393,14 @@ export default function HomePage() {
 
   const handleTargetChange = useCallback((target: ReadabilityTarget) => {
     setReadabilityTarget(target);
-    window.localStorage.setItem('clearwrite.readabilityTarget', target);
+    window.localStorage.setItem(READABILITY_TARGET_KEY, target);
     setSelectedFinding(null);
   }, []);
 
   const handleToggle = useCallback((category: FindingCategory) => {
     setVisibleCategories((current) => {
       const next = current.includes(category) ? current.filter((item) => item !== category) : [...current, category];
-      window.localStorage.setItem('clearwrite.analysisVisibility', JSON.stringify(next));
+      window.localStorage.setItem(ANALYSIS_VISIBILITY_KEY, JSON.stringify(next));
       return next;
     });
   }, []);

@@ -39,7 +39,7 @@ export async function importContent(input: ImportInput): Promise<DocumentContent
 
 export async function exportContent(content: unknown, format: ExportFormat): Promise<{ body: string | Buffer; contentType: string }> {
   const canonical = parseDocumentContent(content);
-  if (format === 'html') return { body: `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ClearWrite document</title></head><body>${documentToHtml(canonical)}</body></html>`, contentType: 'text/html; charset=utf-8' };
+  if (format === 'html') return { body: `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>CleanWrite document</title></head><body>${documentToHtml(canonical)}</body></html>`, contentType: 'text/html; charset=utf-8' };
   if (format === 'md') return { body: documentToMarkdown(canonical), contentType: 'text/markdown; charset=utf-8' };
   if (format === 'txt') return { body: documentToText(canonical), contentType: 'text/plain; charset=utf-8' };
   return { body: await documentToDocx(canonical), contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' };

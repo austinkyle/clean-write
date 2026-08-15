@@ -1,1 +1,1 @@
-export const PRODUCT_NAME = 'ClearWrite';
+export const PRODUCT_NAME = 'CleanWrite';

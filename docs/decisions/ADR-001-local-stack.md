@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-ClearWrite is a single-user macOS writing application that must run locally, feel immediate while typing, persist without a hosted service, and keep future AI credentials server-side. The first implementation phase needs a small, dependable foundation that can grow into the approved editor and analysis architecture.
+CleanWrite is a single-user macOS writing application that must run locally, feel immediate while typing, persist without a hosted service, and keep future AI credentials server-side. The first implementation phase needs a small, dependable foundation that can grow into the approved editor and analysis architecture.
 
 ## Decision
 

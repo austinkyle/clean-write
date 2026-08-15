@@ -16,7 +16,7 @@ const validResponse = {
 
 describe('Make Skimmable AST', () => {
   it('uses a Responses-compatible provider schema with required nullable marks', () => {
-    const format = zodTextFormat(SkimmableProviderResponseSchema, 'clearwrite_skimmable');
+    const format = zodTextFormat(SkimmableProviderResponseSchema, 'cleanwrite_skimmable');
     const firstBlock = (format.schema.properties as { fragment: { items: { anyOf: Array<{ properties: { content: { items: { properties: { marks: unknown }; required: string[] } } } }> } } }).fragment.items.anyOf[0];
     expect(firstBlock?.properties.content.items.required).toContain('marks');
     expect(firstBlock?.properties.content.items.properties.marks).toMatchObject({ anyOf: [{ type: 'array' }, { type: 'null' }] });

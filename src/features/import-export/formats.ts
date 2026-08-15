@@ -85,7 +85,7 @@ function textRuns(nodes: TiptapNode[] = []): Array<TextRun | ExternalHyperlink> 
 function docxParagraph(node: TiptapNode, list?: 'bullet' | 'number'): Paragraph[] {
   if (node.type === 'paragraph' || node.type === 'heading') {
     const heading = node.type === 'heading' ? HeadingLevel[`HEADING_${String(node.attrs?.level ?? 1)}` as 'HEADING_1' | 'HEADING_2' | 'HEADING_3'] : undefined;
-    const options = { children: textRuns(node.content), ...(heading ? { heading } : {}), ...(list === 'bullet' ? { bullet: { level: 0 } } : {}), ...(list === 'number' ? { numbering: { reference: 'clearwrite-numbered', level: 0 } } : {}) };
+    const options = { children: textRuns(node.content), ...(heading ? { heading } : {}), ...(list === 'bullet' ? { bullet: { level: 0 } } : {}), ...(list === 'number' ? { numbering: { reference: 'cleanwrite-numbered', level: 0 } } : {}) };
     return [new Paragraph(options)];
   }
   if (node.type === 'blockquote') return (node.content ?? []).flatMap((child) => child.type === 'paragraph' ? [new Paragraph({ children: textRuns(child.content), style: 'IntenseQuote' })] : docxParagraph(child));
@@ -95,6 +95,6 @@ function docxParagraph(node: TiptapNode, list?: 'bullet' | 'number'): Paragraph[
 }
 
 export async function documentToDocx(content: DocumentContent): Promise<Buffer> {
-  const document = new Document({ numbering: { config: [{ reference: 'clearwrite-numbered', levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.LEFT }] }] }, sections: [{ children: content.content.flatMap((node) => docxParagraph(node)) }] });
+    const document = new Document({ numbering: { config: [{ reference: 'cleanwrite-numbered', levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.LEFT }] }] }, sections: [{ children: content.content.flatMap((node) => docxParagraph(node)) }] });
   return Packer.toBuffer(document);
 }

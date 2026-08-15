@@ -141,7 +141,7 @@ export function replaceEditorBlocks(input: ReplaceEditorBlocksInput): ReplaceEdi
   try {
     const nodes = parsedReplacement.map((node) => editor.state.schema.nodeFromJSON(node as never));
     const transaction = closeHistory(editor.state.tr).replaceWith(snapshot.from, snapshot.to, Fragment.fromArray(nodes));
-    transaction.setMeta('clearwrite-block-replacement', true);
+    transaction.setMeta('cleanwrite-block-replacement', true);
     editor.view.dispatch(transaction);
     try { editor.view.focus(); } catch { /* headless tests have no mounted view; browser editors do */ }
     return { ok: true, from: snapshot.from, to: snapshot.to, replacedBlockCount: currentRange.count, replacementBlockCount: parsedReplacement.length };
@@ -171,7 +171,7 @@ export function replaceEditorRange(input: ReplaceEditorRangeInput): ReplaceEdito
   if (normalizeComparedText(currentText) !== normalizeComparedText(expectedText)) return { ok: false, reason: 'stale-finding' };
 
   const transaction = closeHistory(editor.state.tr).insertText(replacement, from, to);
-  transaction.setMeta('clearwrite-replacement', true);
+  transaction.setMeta('cleanwrite-replacement', true);
   editor.view.dispatch(transaction);
   try { editor.view.focus(); } catch { /* headless tests have no mounted view; browser editors do */ }
   return { ok: true, from, to, replacement };

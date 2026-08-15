@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-This document is the implementation contract for the next ClearWrite phase. It designs local statistics, readability, style detections, worker scheduling, and non-persistent ProseMirror highlights. It does **not** authorize grammar, AI, import/export, or production analysis code in the current review step.
+This document is the implementation contract for the next CleanWrite phase. It designs local statistics, readability, style detections, worker scheduling, and non-persistent ProseMirror highlights. It does **not** authorize grammar, AI, import/export, or production analysis code in the current review step.
 
 The canonical document remains validated Tiptap JSON in SQLite. Analysis is derived client state, never written to `content_json`, `plain_text`, document revisions, or export formats.
 

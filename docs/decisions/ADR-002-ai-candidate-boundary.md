@@ -10,7 +10,7 @@ Accepted
 
 ## Context
 
-ClearWrite already has canonical Tiptap JSON, client-local editor generations,
+CleanWrite already has canonical Tiptap JSON, client-local editor generations,
 exact ProseMirror ranges, and one validated replacement helper. AI features
 need remote text generation but must preserve local-first ownership, undo
 semantics, formatting safety, and optional configuration.

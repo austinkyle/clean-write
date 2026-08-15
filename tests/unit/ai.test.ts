@@ -76,7 +76,7 @@ describe('AI contracts and service', () => {
     const service = new AIService(provider);
     expect(await service.grammar(grammarRequest)).toEqual({ issues: [] });
     expect(await service.grammar({ ...grammarRequest, requestId: 'ec28ce36-2d68-4c5d-95b4-d47bc1678f67' })).toEqual({ issues: [] });
-    expect(calls).toEqual([{ model: GRAMMAR_CONFIG.model, store: false, action: 'grammar_fix', schemaName: 'clearwrite_grammar' }]);
+    expect(calls).toEqual([{ model: GRAMMAR_CONFIG.model, store: false, action: 'grammar_fix', schemaName: 'cleanwrite_grammar' }]);
   });
 
   it('routes document feedback to Terra with strict structured output and data boundaries', async () => {

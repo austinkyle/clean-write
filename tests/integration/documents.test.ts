@@ -21,7 +21,7 @@ import {
 const handles: ReturnType<typeof openDatabase>[] = [];
 
 function createTestDatabase() {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'clearwrite-documents-'));
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'cleanwrite-documents-'));
   const handle = openDatabase(path.join(directory, 'test.sqlite'));
   handles.push(handle);
   return handle.db;

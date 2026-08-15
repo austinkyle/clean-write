@@ -13,7 +13,7 @@ function request(signal?: AbortSignal): ProviderStructuredRequest<{ value: strin
     maxOutputTokens: 100,
     instructions: 'Rewrite the text.',
     dataPacket: JSON.stringify({ target: 'A sentence.' }),
-    schemaName: 'clearwrite_rewrite',
+    schemaName: 'cleanwrite_rewrite',
     schema: z.object({ value: z.string() }),
     signal,
     store: false,

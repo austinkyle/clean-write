@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-describe('ClearWrite production launcher', () => {
+describe('CleanWrite production launcher', () => {
   it('prepares client assets for the standalone Next runtime', () => {
     const launcher = readFileSync(path.join(process.cwd(), 'start.command'), 'utf8');
 

@@ -14,7 +14,7 @@ done
 
 APP_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" >/dev/null 2>&1 && pwd)"
 if ! cd "$APP_DIR"; then
-  echo "ClearWrite could not enter its application directory: $APP_DIR" >&2
+  echo "CleanWrite could not enter its application directory: $APP_DIR" >&2
   exit 1
 fi
 
@@ -23,7 +23,7 @@ PID_FILE="$RUNTIME_DIR/app.pid"
 PORT_FILE="$RUNTIME_DIR/app.port"
 
 if [ ! -f "$PID_FILE" ]; then
-  echo "ClearWrite is already stopped."
+  echo "CleanWrite is already stopped."
   exit 0
 fi
 
@@ -45,12 +45,12 @@ case "$command_line" in
 esac
 
 if [ "$owned" -ne 1 ]; then
-  echo "ClearWrite runtime state was stale; no matching application process was terminated."
+  echo "CleanWrite runtime state was stale; no matching application process was terminated."
   rm -f "$PID_FILE" "$PORT_FILE"
   exit 0
 fi
 
-echo "Stopping ClearWrite (PID $pid)..."
+echo "Stopping CleanWrite (PID $pid)..."
 kill -TERM "$pid" 2>/dev/null || true
 attempt=1
 while kill -0 "$pid" 2>/dev/null && [ "$attempt" -le 20 ]; do
@@ -59,9 +59,9 @@ while kill -0 "$pid" 2>/dev/null && [ "$attempt" -le 20 ]; do
 done
 
 if kill -0 "$pid" 2>/dev/null; then
-  echo "ClearWrite did not stop gracefully; ending the verified process."
+  echo "CleanWrite did not stop gracefully; ending the verified process."
   kill -KILL "$pid" 2>/dev/null || true
 fi
 
 rm -f "$PID_FILE" "$PORT_FILE"
-echo "ClearWrite stopped."
+echo "CleanWrite stopped."

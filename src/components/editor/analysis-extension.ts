@@ -4,7 +4,7 @@ import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
 import type { MappedFinding, FindingCategory } from '@/features/analysis/types';
 
-export const analysisPluginKey = new PluginKey<AnalysisPluginState>('clearwrite-analysis');
+export const analysisPluginKey = new PluginKey<AnalysisPluginState>('cleanwrite-analysis');
 export type AnalysisMeta =
   | { type: 'replace'; findings: MappedFinding[]; visibleCategories: FindingCategory[]; generation: number }
   | { type: 'grammar-invalidate'; blockIndexes: number[] }
@@ -27,7 +27,7 @@ function makeDecorations(doc: Parameters<typeof DecorationSet.create>[0], findin
 export type AnalysisExtensionOptions = { onFindingClick?: (...args: [MappedFinding]) => void };
 
 export const AnalysisExtension = Extension.create<AnalysisExtensionOptions>({
-  name: 'clearwriteAnalysis',
+  name: 'cleanwriteAnalysis',
   addOptions() { return { onFindingClick: undefined }; },
   addProseMirrorPlugins() {
     const onFindingClick = this.options.onFindingClick;

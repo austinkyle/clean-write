@@ -1,4 +1,4 @@
-# Make Skimmable Architecture — ClearWrite
+# Make Skimmable Architecture — CleanWrite
 
 ## Status
 
@@ -94,7 +94,7 @@ At acceptance, `replaceEditorBlocks` must:
 5. Canonically validate the candidate and enforce the generated v1 allowlist.
 6. Build active-schema ProseMirror nodes and replace exactly that slice with one
    `closeHistory(editor.state.tr)` transaction. Set
-   `clearwrite-block-replacement` metadata, dispatch once, then focus normally.
+   `cleanwrite-block-replacement` metadata, dispatch once, then focus normally.
 
 No remapping by repeated text, partial application, or whole-document mutation
 is permitted. Failures are typed as stale, document mismatch, generation
@@ -103,7 +103,7 @@ but unusable. One transaction preserves undo/redo. Existing editor updates then
 perform autosave and fresh deterministic analysis normally; this path does not
 write SQLite or invoke analysis itself.
 
-## D. ClearWrite-owned AST contract
+## D. CleanWrite-owned AST contract
 
 The provider returns one candidate in v1. One reviewable structure is safer than
 two competing large ASTs under the existing 1,600-token cap; Regenerate is the
