@@ -1,5 +1,7 @@
 # CleanWrite
 
+**[FDE case study](FDE-CASE-STUDY.md)** — local document ownership, deterministic analysis, optional AI suggestions, and human approval with stale-selection protection. This is product implementation evidence; client observation, adoption, and measured business ROI are not established here.
+
 CleanWrite is a calm writing app that keeps your drafts on your own computer. It helps you write, spot hard-to-read passages, and make focused improvements without moving your documents into a hosted editor. Optional AI tools can rewrite selected text, check grammar, give whole-document feedback, or turn dense paragraphs into a clearer structure; you remain in control of every change.
 
 ## What it does
